@@ -22,4 +22,8 @@ export class User {
 
     @UpdateDateColumn({ type: 'timestamp' })
     updated_at: Date;
+
+    @Column({ default: 'USER' })
+    role: string;
+
 }

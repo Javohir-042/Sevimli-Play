@@ -21,7 +21,7 @@ export class CreateUserDto {
         example: "+998901234567",
     })
     @IsPhoneNumber("UZ")
-    phone: string;
+    phone?: string;
 
     @ApiPropertyOptional({
         description: "Email tekshirilgan yoki yo'qligi",
