@@ -38,16 +38,16 @@ export class AdminService {
   }
 
   async update(id: number, updateAdminDto: UpdateAdminDto) {
-    const user = await this.adminRepo.findOne({ where: { id } });
-    if (!user) throw new NotFoundException("Bunday IDlik foydalanuvchi topilmadi");
+    const admin = await this.adminRepo.findOne({ where: { id } });
+    if (!admin) throw new NotFoundException("Bunday IDlik foydalanuvchi topilmadi");
 
-    if (updateAdminDto.email && updateAdminDto.email !== user.email) {
+    if (updateAdminDto.email && updateAdminDto.email !== admin.email) {
       throw new BadRequestException("Emailni o'zgartirish mumkin emas!");
     }
 
-    Object.assign(user, updateAdminDto);
+    Object.assign(admin, updateAdminDto);
 
-    return await this.adminRepo.save(user);
+    return await this.adminRepo.save(admin);
   }
 
 

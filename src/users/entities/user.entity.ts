@@ -1,4 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Subscription } from '../../subscriptions/entities/subscription.entity';
+import { Payment } from '../../payments/entities/payment.entity';
 
 @Entity('users')
 export class User {
@@ -26,4 +29,11 @@ export class User {
     @Column({ default: 'USER' })
     role: string;
 
+
+    @OneToMany(() => Subscription, (subscription) => subscription.user)
+    subscription: Subscription[];
+
+
+    @OneToMany(() => Payment, (payments) => payments.user)
+    payment: Payment[];
 }
