@@ -27,13 +27,13 @@ export class AdminController {
     return this.adminService.findAll();
   }
 
-  @Roles(AdminRole.SUPERADMIN, AdminRole.ADMIN, "ID")
+  @Roles(AdminRole.SUPERADMIN, "ID")
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.adminService.findOne(+id);
   }
 
-  @Roles(AdminRole.SUPERADMIN, AdminRole.ADMIN, "ID")
+  @Roles(AdminRole.SUPERADMIN, "ID")
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAdminDto: UpdateAdminDto) {
     return this.adminService.update(+id, updateAdminDto);

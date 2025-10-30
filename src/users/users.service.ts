@@ -61,4 +61,17 @@ export class UsersService {
 
     return {};
   }
+
+  async findUserByEmail(email: string) {
+    const user = await this.userRepo.findOne({
+      where: { email },
+    });
+    return user;
+  }
+
+
+  async updateRefreshToken(id: number, token: string | null) {
+    await this.userRepo.update(id, { refresh_token: token || undefined });  // ✅
+  }
+  
 }

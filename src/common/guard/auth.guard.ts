@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
         if (!auth?.startsWith("Bearer")) throw new UnauthorizedException();
 
         const token = auth.slice(7);
-
         try {
             const payload = jwt.verify(token, process.env.ACCESS_TOKEN_KEY!);
             req.user = payload;

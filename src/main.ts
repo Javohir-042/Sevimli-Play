@@ -2,15 +2,17 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import cookieParser from 'cookie-parser'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {logger: ["error", "warn"]});
 
   app.setGlobalPrefix("api")
+
+  app.use(cookieParser());
   
   app.useGlobalPipes(new ValidationPipe())
 
-  const PORT = process.env.PORT
 
   const config = new DocumentBuilder()
     .setTitle('Sevimli Play Project')
@@ -27,9 +29,11 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory)
 
-  await app.listen(process.env.PORT ?? 5555, () => {
+  const PORT = process.env.PORT ?? 5555;
+  await app.listen(PORT, () => {
     console.log(`Server started at: http://localhost:${PORT}`);
     console.log(`Swagger document: http://localhost:${PORT}/api`);
   });
+
 }
 bootstrap();

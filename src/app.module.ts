@@ -3,10 +3,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AdminModule } from './admin/admin.module';
 import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
 import { PlansModule } from './plans/plans.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { PaymentsModule } from './payments/payments.module';
+import { AuthModule } from './auth/auth.module';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @Module({
   imports: [
@@ -42,6 +43,10 @@ import { PaymentsModule } from './payments/payments.module';
     SubscriptionsModule,
 
     PaymentsModule,
+
+    ProfilesModule,
+
+
 
 
   ],

@@ -16,7 +16,7 @@ export class SubscriptionsService {
   ) { }
 
   async create(createSubscriptionDto: CreateSubscriptionDto) {
-    const { user_id, plan_id, start_date, end_date, auto_renew } = createSubscriptionDto;
+    const { user_id, plan_id, start_date, end_date } = createSubscriptionDto;
 
     const user = await this.userRepo.findOne({ where: { id: user_id } })
     if (!user) {

@@ -63,4 +63,12 @@ export class AdminService {
     return {};
   }
 
+  async findByEmail(email: string) {
+    return this.adminRepo.findOne({ where: { email } });
+  }
+
+  async updateRefreshToken(id: number, token: string | null) {
+    await this.adminRepo.update(id, { refresh_token: token || undefined });  // ✅
+  }
+
 }

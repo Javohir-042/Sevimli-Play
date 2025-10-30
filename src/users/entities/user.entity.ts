@@ -2,7 +2,7 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Subscription } from '../../subscriptions/entities/subscription.entity';
 import { Payment } from '../../payments/entities/payment.entity';
-
+import { Profile } from '../../profiles/entities/profile.entity';
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
@@ -29,6 +29,8 @@ export class User {
     @Column({ default: 'USER' })
     role: string;
 
+    @Column({ type: 'varchar', nullable: true })  
+    refresh_token?: string;
 
     @OneToMany(() => Subscription, (subscription) => subscription.user)
     subscription: Subscription[];
@@ -36,4 +38,8 @@ export class User {
 
     @OneToMany(() => Payment, (payments) => payments.user)
     payment: Payment[];
+
+    @OneToMany(() => Profile, (profile) => profile.user)
+    profiles: Profile[];
+
 }
