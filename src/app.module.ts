@@ -8,6 +8,13 @@ import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { PaymentsModule } from './payments/payments.module';
 import { AuthModule } from './auth/auth.module';
 import { ProfilesModule } from './profiles/profiles.module';
+import { DevicesModule } from './devices/devices.module';
+import { ContentsModule } from './contents/contents.module';
+import { TagsModule } from './tags/tags.module';
+import { ContentTagsModule } from './content-tags/content-tags.module';
+import { CategoriesModule } from './categories/categories.module';
+import { ContentCategoriesModule } from './content-categories/content-categories.module';
+import { RatingsModule } from './ratings/ratings.module';
 
 @Module({
   imports: [
@@ -45,6 +52,20 @@ import { ProfilesModule } from './profiles/profiles.module';
     PaymentsModule,
 
     ProfilesModule,
+
+    DevicesModule,
+
+    ContentsModule,
+
+    TagsModule,
+
+    ContentTagsModule,
+
+    CategoriesModule,
+
+    ContentCategoriesModule,
+
+    RatingsModule,
 
 
 

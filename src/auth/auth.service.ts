@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import * as bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
 import { AdminService } from '../admin/admin.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -25,7 +25,6 @@ export class AuthService {
         const hashed = await bcrypt.hash(dto.password, 10);
         const user = await this.usersService.create({ ...dto, password: hashed });
 
-        // return this.generateTokens(user.id, user.email, user.role, 'user');
         return user
     }
 

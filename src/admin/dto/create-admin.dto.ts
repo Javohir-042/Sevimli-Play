@@ -13,7 +13,7 @@ export class CreateAdminDto {
 
     @ApiProperty({
         description: "Admin kuchli paroli",
-        example: "StrongPassword123!",
+        example: "Javohir123!",
     })
     @IsStrongPassword({})
     @IsNotEmpty()

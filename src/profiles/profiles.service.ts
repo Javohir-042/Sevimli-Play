@@ -31,7 +31,7 @@ export class ProfilesService {
   }
 
   async findOne(id: number) {
-    const profile = await this.profileRepo.findOneBy({ id })
+    const profile = await this.profileRepo.findOne({where: { id }, relations: ['user']})
     if (!profile) {
       throw new NotFoundException("Bunday id mavjud emas")
     }
@@ -65,6 +65,6 @@ export class ProfilesService {
     if (profiles.affected === 0) {
       throw new NotFoundException('profiles not found')
     }
-    return {}
+    return { message: "id o'chirildi"}
   }
 }

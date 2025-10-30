@@ -4,14 +4,14 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 export class CreateUserDto {
     @ApiProperty({
         description: "Foydalanuvchi email manzili",
-        example: "botir123@gmail.com",
+        example: "Bobur123@gmail.com",
     })
     @IsEmail({})
     email: string;
 
     @ApiProperty({
         description: "Foydalanuvchi paroli",
-        example: "botir123!!",
+        example: "Bobur123!",
     })
     @IsNotEmpty()
     password: string;

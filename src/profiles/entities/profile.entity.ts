@@ -1,7 +1,9 @@
 // src/profiles/entities/profile.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { User } from '../../users/entities/user.entity'; // User entity
 import { ProfilesLanguageEnum } from '../../common/enum/profiles.role';
+import { Device } from '../../devices/entities/device.entity';
+import { Rating } from '../../ratings/entities/rating.entity';
 
 @Entity('profiles')
 export class Profile {
@@ -26,4 +28,10 @@ export class Profile {
 
     @Column({ default: false })
     is_default: boolean;
+
+    @OneToMany(() => Device, (device) => device.profile)
+    devices: Device[];
+
+    @OneToMany(() => Rating, (rating) => rating.content)
+    ratings: Rating[];
 }
