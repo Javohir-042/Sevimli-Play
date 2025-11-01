@@ -18,7 +18,7 @@ export class Admin {
     @Column({ type: 'enum', enum: AdminRole, default: AdminRole.ADMIN })
     role: AdminRole;
 
-    @Column({ type: 'varchar', nullable: true })  // ✅ type qo'shildi
+    @Column({ type: 'varchar', nullable: true })  
     refresh_token?: string;
 
     @CreateDateColumn({ type: 'timestamp'})
@@ -26,4 +26,5 @@ export class Admin {
 
     @UpdateDateColumn({ type: 'timestamp'})
     updated_at: Date;
+
 }

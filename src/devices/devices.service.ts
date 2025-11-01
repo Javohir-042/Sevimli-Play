@@ -28,7 +28,7 @@ export class DevicesService {
   }
 
   findAll() {
-    return this.deviceRepo.find({ relations: ['profile'], order: { id: 'DESC' } });
+    return this.deviceRepo.find({ relations: ['profile'], order: { id: 'ASC' } });
   }
 
   async findOne(id: number) {

@@ -1,45 +1,40 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { ProfilesService } from './profiles.service';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
-import { Profile } from './entities/profile.entity';
+import { ApiTags,ApiBearerAuth } from '@nestjs/swagger';
+import { AuthGuard } from '../common/guard/auth.guard';
+import { RolesGuard } from '../common/guard/roles.guard';
+import { AdminRole } from '../common/enum/admin.role';
+import { Roles } from '../common/decorator/roles.decorator';
 
 @ApiTags('Profiles')
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard)
 @Controller('profiles')
 export class ProfilesController {
   constructor(private readonly profilesService: ProfilesService) { }
 
+  @Roles(AdminRole.ADMIN, AdminRole.SUPERADMIN, AdminRole.USER)
   @Post()
-  @ApiOperation({ summary: 'Create a new profile' })
-  @ApiResponse({ status: 201, description: 'Profile created successfully', type: Profile })
-  @ApiBody({ type: CreateProfileDto })
   create(@Body() createProfileDto: CreateProfileDto) {
     return this.profilesService.create(createProfileDto);
   }
 
+  @Roles(AdminRole.ADMIN, AdminRole.SUPERADMIN)
   @Get()
-  @ApiOperation({ summary: 'Get all profiles' })
-  @ApiResponse({ status: 200, description: 'List of profiles', type: [Profile] })
   findAll() {
     return this.profilesService.findAll();
   }
 
+  @Roles(AdminRole.ADMIN, AdminRole.SUPERADMIN, AdminRole.USER)
   @Get(':id')
-  @ApiOperation({ summary: 'Get profile by id' })
-  @ApiParam({ name: 'id', type: Number, description: 'Profile ID' })
-  @ApiResponse({ status: 200, description: 'Profile found', type: Profile })
-  @ApiResponse({ status: 404, description: 'Profile not found' })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.profilesService.findOne(id);
   }
 
+  @Roles(AdminRole.ADMIN, AdminRole.SUPERADMIN, AdminRole.USER)
   @Patch(':id')
-  @ApiOperation({ summary: 'Update profile by id' })
-  @ApiParam({ name: 'id', type: Number, description: 'Profile ID' })
-  @ApiBody({ type: UpdateProfileDto })
-  @ApiResponse({ status: 200, description: 'Profile updated successfully', type: Profile })
-  @ApiResponse({ status: 404, description: 'Profile not found' })
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateProfileDto: UpdateProfileDto,
@@ -47,11 +42,8 @@ export class ProfilesController {
     return this.profilesService.update(id, updateProfileDto);
   }
 
+  @Roles(AdminRole.SUPERADMIN)
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete profile by id' })
-  @ApiParam({ name: 'id', type: Number, description: 'Profile ID' })
-  @ApiResponse({ status: 200, description: 'Profile deleted successfully' })
-  @ApiResponse({ status: 404, description: 'Profile not found' })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.profilesService.remove(id);
   }

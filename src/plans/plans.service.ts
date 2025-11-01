@@ -17,7 +17,7 @@ export class PlansService {
   }
 
   findAll() {
-    return this.planRepo.find()
+    return this.planRepo.find({order: { id: 'ASC'}})
   }
 
   async findOne(id: number) {
@@ -47,6 +47,6 @@ export class PlansService {
 
     await this.planRepo.remove(plan)
 
-    return {}
+    return {message: `id o'chirildi`}
   }
 }

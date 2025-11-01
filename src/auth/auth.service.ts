@@ -79,8 +79,13 @@ export class AuthService {
         const valid = await bcrypt.compare(dto.password, admin.password);
         if (!valid) throw new UnauthorizedException('Email yoki parol xato');
 
+        if (admin.role === 'SUPERADMIN') {
+            console.log(`✅ SuperAdmin tizimga kirdi: ${admin.email}`);
+        }
+
         return this.generateTokens(admin.id, admin.email, admin.role, 'admin');
     }
+
 
     async adminSignout(adminId: number) {
         await this.adminService.updateRefreshToken(adminId, null);

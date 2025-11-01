@@ -19,7 +19,7 @@ export class ContentsService {
   }
 
   findAll() {
-    return this.contentRepo.find({ order: { id: 'DESC' } })
+    return this.contentRepo.find({ order: { id: 'ASC' } })
   }
 
   async findOne(id: number) {

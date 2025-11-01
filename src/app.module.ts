@@ -15,6 +15,13 @@ import { ContentTagsModule } from './content-tags/content-tags.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ContentCategoriesModule } from './content-categories/content-categories.module';
 import { RatingsModule } from './ratings/ratings.module';
+import { WatchEpisodesModule } from './episodes/episodes.module';
+import { MediaFilesModule } from './media_files/media_files.module';
+import { ThumbnailsModule } from './thumbnails/thumbnails.module';
+import { WatchHistoriesModule } from './watch_histories/watch_histories.module';
+import { CommentsModule } from './comments/comments.module';
+import { PeopleModule } from './people/people.module';
+import { ContentPeopleModule } from './content_people/content_people.module';
 
 @Module({
   imports: [
@@ -67,6 +74,20 @@ import { RatingsModule } from './ratings/ratings.module';
 
     RatingsModule,
 
+    WatchEpisodesModule,
+
+    MediaFilesModule,
+
+    ThumbnailsModule,
+
+    WatchHistoriesModule,
+
+    CommentsModule,
+
+    PeopleModule,
+
+    ContentPeopleModule,
+
 
 
 
@@ -74,4 +95,4 @@ import { RatingsModule } from './ratings/ratings.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

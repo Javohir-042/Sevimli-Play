@@ -51,6 +51,7 @@ export class PaymentsService {
   findAll() {
     return this.paymentRepo.find({
       relations: ['user', 'subscription'],
+      order: { id :'ASC'}
     });
   }
 
@@ -114,6 +115,6 @@ export class PaymentsService {
     if (payment.affected === 0) {
       throw new NotFoundException('payment not found')
     }
-    return {}
+    return {message: `id o'chirldi`}
   }
 }

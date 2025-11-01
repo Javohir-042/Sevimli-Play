@@ -4,6 +4,12 @@ import { ProfilesLanguageEnum } from "../../common/enum/profiles.role";
 import { ContentTag } from "../../content-tags/entities/content-tag.entity";
 import { ContentCategory } from "../../content-categories/entities/content-category.entity";
 import { Rating } from "../../ratings/entities/rating.entity";
+import { Episode, } from "../../episodes/entities/episode.entity";
+import { MediaFile } from "../../media_files/entities/media_file.entity";
+import { Thumbnail } from "../../thumbnails/entities/thumbnail.entity";
+import { WatchHistory } from "../../watch_histories/entities/watch_history.entity";
+import { Comment } from "../../comments/entities/comment.entity";
+import { ContentPeople } from "../../content_people/entities/content_people.entity";
 
 @Entity({ name: "contents" })
 export class Content {
@@ -65,4 +71,27 @@ export class Content {
 
     @OneToMany(() => Rating, (rating) => rating.content)
     ratings: Rating[];
+
+
+    @OneToMany(() => Episode, (episode) => episode.content)
+    episodes: Episode[];
+
+
+    @OneToMany(() => MediaFile, (mediaFile) => mediaFile.content)
+    mediaFiles: MediaFile[];
+
+
+    @OneToMany(() => Thumbnail, (thumbnail) => thumbnail.content)
+    thumbnails: Thumbnail[];
+
+
+    @OneToMany(() => WatchHistory, (watchHistory) => watchHistory.content)
+    watch_histories: WatchHistory[];
+
+    @OneToMany(() => Comment, (comment) => comment.content)
+    comments: Comment[];
+
+
+    @OneToMany(() => ContentPeople, (contentPeople) => contentPeople.content)
+    contentPeople: ContentPeople[];
 }

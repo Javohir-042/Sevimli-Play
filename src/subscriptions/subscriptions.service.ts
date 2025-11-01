@@ -38,7 +38,7 @@ export class SubscriptionsService {
   }
 
   findAll() {
-    return this.subscriptionRepo.find({ relations: ['user', 'plan'], order: { id: 'DESC' } })
+    return this.subscriptionRepo.find({ relations: ['user', 'plan'], order: { id: 'ASC' } })
   }
 
   async findOne(id: number) {
@@ -93,6 +93,6 @@ export class SubscriptionsService {
     if(subscription.affected === 0) {
       throw new NotFoundException('Subscription not found')
     }
-    return {}
+    return {message: `id o'chirildi`}
   }
 }

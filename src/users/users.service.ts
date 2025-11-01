@@ -24,7 +24,7 @@ export class UsersService {
   }
 
   async findAll() {
-    return this.userRepo.find({ order: { created_at: 'DESC' } });
+    return this.userRepo.find({ order: { created_at: 'ASC' } });
   }
 
   async findOne(id: number) {
@@ -59,7 +59,7 @@ export class UsersService {
 
     await this.userRepo.remove(user);
 
-    return {};
+    return {message: `id o'chirildi`};
   }
 
   async findUserByEmail(email: string) {

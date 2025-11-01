@@ -41,5 +41,4 @@ export class User {
 
     @OneToMany(() => Profile, (profile) => profile.user)
     profiles: Profile[];
-
 }

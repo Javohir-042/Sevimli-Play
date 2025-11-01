@@ -5,7 +5,7 @@ import { AdminRole } from "../../common/enum/admin.role";
 export class CreateAdminDto {
     @ApiProperty({
         description: "Admin email manzili",
-        example: "javohirquromboyev933@gmail.com",
+        example: "javohirquromboye123@gmail.com",
     })
     @IsEmail({})
     @IsNotEmpty()

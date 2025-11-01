@@ -12,13 +12,19 @@ export class TagsService {
   ) { }
 
   async create(createTagDto: CreateTagDto) {
-    const tag = this.tagsRepo.create({ ...createTagDto })
+    const existingTag = await this.tagsRepo.findOneBy({ name: createTagDto.name });
 
-    return this.tagsRepo.save(tag)
+    if (existingTag) {
+      throw new NotFoundException(`"${createTagDto.name}" nomli tag allaqachon mavjud`);
+    }
+
+    const tag = this.tagsRepo.create({ ...createTagDto });
+    return this.tagsRepo.save(tag);
   }
 
+
   findAll() {
-    return this.tagsRepo.find({ order: { id: 'DESC' } })
+    return this.tagsRepo.find({ order: { id: 'ASC' } })
   }
 
   async findOne(id: number) {
@@ -31,15 +37,24 @@ export class TagsService {
   }
 
   async update(id: number, updateTagDto: UpdateTagDto) {
-    const tags = await this.tagsRepo.findOneBy({ id })
-    if (!tags) {
-      throw new NotFoundException("Tags id not found")
+    
+    const tag = await this.tagsRepo.findOneBy({ id });
+    if (!tag) {
+      throw new NotFoundException("Tag id not found");
     }
 
-    Object.assign(tags, updateTagDto);
+    if (updateTagDto.name && updateTagDto.name !== tag.name) {
+      const existingTag = await this.tagsRepo.findOneBy({ name: updateTagDto.name });
+      if (existingTag) {
+        throw new NotFoundException(`${updateTagDto.name} nomli tag allaqachon mavjud`);
+      }
+    }
 
-    return this.tagsRepo.save(tags);
+    Object.assign(tag, updateTagDto);
+
+    return this.tagsRepo.save(tag);
   }
+
 
   async remove(id: number) {
     const tags = await this.tagsRepo.delete({ id })

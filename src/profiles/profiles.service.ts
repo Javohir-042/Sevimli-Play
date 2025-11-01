@@ -27,7 +27,7 @@ export class ProfilesService {
   }
 
   findAll() {
-    return this.profileRepo.find({ relations: ['user'], order: { id: 'DESC' } })
+    return this.profileRepo.find({ relations: ['user'], order: { id: 'ASC' } })
   }
 
   async findOne(id: number) {
